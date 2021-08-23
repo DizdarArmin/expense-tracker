@@ -18,12 +18,13 @@ export default function Input({ addExpense }) {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!price) {
-      setValidation("Price can't be empty");
+      setValidation("Amount can't be empty");
     } else if (price <= 0) {
-      setValidation("Press can't be 0 or negative");
+      setValidation("Amount can't be 0 or negative");
     } else {
       setValidation(" ");
       addExpense(expense, price);
+      setPrice("");
       console.log(expense, price);
     }
   };
@@ -42,23 +43,37 @@ export default function Input({ addExpense }) {
       <p className="text-white">Easy way of tracking monthly expenses.</p>
       <br />
       <form onSubmit={(e) => onSubmit(e)} className="form-check-inline row">
-        <input
-          autoFocus={true}
-          placeholder="1190"
-          className="form-control col"
-          type="number"
-          value={price}
-          onChange={(e) => priceChange(e)}
-        />
-        <select
-          className="form-control col"
-          value={expense}
-          onChange={(e) => expenseChange(e)}
-        >
-          {expenses.map((item) => (
-            <option key={Math.random()}>{item}</option>
-          ))}
-        </select>
+        <div className="form-group col">
+          <label className="text-white" for="amount">
+            Amount
+          </label>
+          <input
+            autoComplete="on"
+            id="amount"
+            autoFocus={true}
+            placeholder="1190 $"
+            className="form-control col"
+            type="number"
+            value={price}
+            onChange={(e) => priceChange(e)}
+          />
+        </div>
+        <div className="form-group col">
+          <label for="expense" className="text-white">
+            Expense
+          </label>
+          <select
+            id="expense"
+            className="form-control"
+            value={expense}
+            onChange={(e) => expenseChange(e)}
+          >
+            {expenses.map((item) => (
+              <option key={Math.random()}>{item}</option>
+            ))}
+          </select>
+        </div>
+
         <button type="submit" className="btn btn-danger col">
           {" "}
           Add

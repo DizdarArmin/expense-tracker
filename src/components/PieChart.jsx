@@ -9,6 +9,7 @@ export default function PieChart({ data }) {
       chartType="PieChart"
       data={[["Task", "Hours per Day"], ...data]}
       options={{
+        is3D: true,
         legend: "none",
         backgroundColor: "transparent",
         colors: [
